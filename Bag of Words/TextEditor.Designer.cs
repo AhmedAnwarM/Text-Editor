@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TextEditor));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnCreateIndex = new MetroFramework.Controls.MetroButton();
             this.btnSplitSpaces = new MetroFramework.Controls.MetroButton();
             this.btnSearch = new MetroFramework.Controls.MetroButton();
@@ -48,20 +48,26 @@
             this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.textBox = new System.Windows.Forms.TextBox();
             this.panelEnterText = new MetroFramework.Controls.MetroPanel();
+            this.btnNewFile = new MetroFramework.Controls.MetroButton();
+            this.btnOpenFile = new MetroFramework.Controls.MetroButton();
+            this.btnSaveFile = new MetroFramework.Controls.MetroButton();
             this.lblLetterCounter = new MetroFramework.Controls.MetroLabel();
             this.txtBoxSearch = new MetroFramework.Controls.MetroTextBox();
             this.lblWordCounter = new MetroFramework.Controls.MetroLabel();
             this.gridViewResults = new MetroFramework.Controls.MetroGrid();
             this.btnBack = new MetroFramework.Controls.MetroButton();
-            this.wordNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.wordsColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelResults = new MetroFramework.Controls.MetroPanel();
             this.txtBoxFind = new MetroFramework.Controls.MetroTextBox();
             this.txtBoxReplace = new MetroFramework.Controls.MetroTextBox();
             this.btnReplace = new MetroFramework.Controls.MetroButton();
             this.panelFindAndReplace = new MetroFramework.Controls.MetroPanel();
-            this.btnSaveText = new MetroFramework.Controls.MetroButton();
-            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.wordNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colWords = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFrequency = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnBack1 = new MetroFramework.Controls.MetroButton();
+            this.tileSwitchLang = new MetroFramework.Controls.MetroTile();
             this.panelEnterText.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewResults)).BeginInit();
             this.panelResults.SuspendLayout();
@@ -76,7 +82,7 @@
             this.btnCreateIndex.Name = "btnCreateIndex";
             this.btnCreateIndex.Size = new System.Drawing.Size(180, 80);
             this.btnCreateIndex.TabIndex = 0;
-            this.btnCreateIndex.Text = "Create Index";
+            this.btnCreateIndex.Text = "تهميش النص";
             this.btnCreateIndex.UseSelectable = true;
             this.btnCreateIndex.Click += new System.EventHandler(this.btnCreateIndex_Click);
             // 
@@ -88,7 +94,7 @@
             this.btnSplitSpaces.Name = "btnSplitSpaces";
             this.btnSplitSpaces.Size = new System.Drawing.Size(180, 80);
             this.btnSplitSpaces.TabIndex = 2;
-            this.btnSplitSpaces.Text = "Split Text";
+            this.btnSplitSpaces.Text = "تقسيم النص";
             this.btnSplitSpaces.UseSelectable = true;
             this.btnSplitSpaces.Click += new System.EventHandler(this.btnSplitSpaces_Click);
             // 
@@ -100,7 +106,7 @@
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(180, 80);
             this.btnSearch.TabIndex = 3;
-            this.btnSearch.Text = "Search";
+            this.btnSearch.Text = "بحث";
             this.btnSearch.UseSelectable = true;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             this.btnSearch.MouseHover += new System.EventHandler(this.btnSearch_MouseHover);
@@ -113,7 +119,7 @@
             this.btnFindAndReplace.Name = "btnFindAndReplace";
             this.btnFindAndReplace.Size = new System.Drawing.Size(180, 80);
             this.btnFindAndReplace.TabIndex = 4;
-            this.btnFindAndReplace.Text = "Find and Replace";
+            this.btnFindAndReplace.Text = "بحث و إستبدال";
             this.btnFindAndReplace.UseSelectable = true;
             this.btnFindAndReplace.Click += new System.EventHandler(this.btnFindAndReplace_Click);
             // 
@@ -180,9 +186,9 @@
             this.metroLabel1.AutoSize = true;
             this.metroLabel1.Location = new System.Drawing.Point(329, 29);
             this.metroLabel1.Name = "metroLabel1";
-            this.metroLabel1.Size = new System.Drawing.Size(73, 19);
+            this.metroLabel1.Size = new System.Drawing.Size(66, 19);
             this.metroLabel1.TabIndex = 9;
-            this.metroLabel1.Text = "Select Font";
+            this.metroLabel1.Text = "إختيار الخط";
             // 
             // cmbBoxFonts
             // 
@@ -247,9 +253,9 @@
             this.metroLabel2.AutoSize = true;
             this.metroLabel2.Location = new System.Drawing.Point(500, 29);
             this.metroLabel2.Name = "metroLabel2";
-            this.metroLabel2.Size = new System.Drawing.Size(69, 19);
+            this.metroLabel2.Size = new System.Drawing.Size(51, 19);
             this.metroLabel2.TabIndex = 14;
-            this.metroLabel2.Text = "Alignment";
+            this.metroLabel2.Text = "المحاذاة";
             // 
             // textBox
             // 
@@ -260,13 +266,16 @@
             this.textBox.Name = "textBox";
             this.textBox.Size = new System.Drawing.Size(998, 453);
             this.textBox.TabIndex = 15;
-            this.textBox.Text = "Enter Text Here...";
+            this.textBox.Text = "أدخل النص هنا...";
+            this.textBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.textBox.Click += new System.EventHandler(this.textBox_Click);
             this.textBox.TextChanged += new System.EventHandler(this.textBox_TextChanged);
             // 
             // panelEnterText
             // 
-            this.panelEnterText.Controls.Add(this.btnSaveText);
+            this.panelEnterText.Controls.Add(this.btnNewFile);
+            this.panelEnterText.Controls.Add(this.btnOpenFile);
+            this.panelEnterText.Controls.Add(this.btnSaveFile);
             this.panelEnterText.Controls.Add(this.lblLetterCounter);
             this.panelEnterText.Controls.Add(this.txtBoxSearch);
             this.panelEnterText.Controls.Add(this.lblWordCounter);
@@ -296,14 +305,44 @@
             this.panelEnterText.VerticalScrollbarHighlightOnWheel = false;
             this.panelEnterText.VerticalScrollbarSize = 10;
             // 
+            // btnNewFile
+            // 
+            this.btnNewFile.Location = new System.Drawing.Point(318, 602);
+            this.btnNewFile.Name = "btnNewFile";
+            this.btnNewFile.Size = new System.Drawing.Size(116, 31);
+            this.btnNewFile.TabIndex = 21;
+            this.btnNewFile.Text = "ملف جديد";
+            this.btnNewFile.UseSelectable = true;
+            this.btnNewFile.Click += new System.EventHandler(this.btnNewFile_Click_1);
+            // 
+            // btnOpenFile
+            // 
+            this.btnOpenFile.Location = new System.Drawing.Point(624, 602);
+            this.btnOpenFile.Name = "btnOpenFile";
+            this.btnOpenFile.Size = new System.Drawing.Size(116, 31);
+            this.btnOpenFile.TabIndex = 20;
+            this.btnOpenFile.Text = "فتح ملف";
+            this.btnOpenFile.UseSelectable = true;
+            this.btnOpenFile.Click += new System.EventHandler(this.btnOpenFile_Click);
+            // 
+            // btnSaveFile
+            // 
+            this.btnSaveFile.Location = new System.Drawing.Point(471, 602);
+            this.btnSaveFile.Name = "btnSaveFile";
+            this.btnSaveFile.Size = new System.Drawing.Size(116, 31);
+            this.btnSaveFile.TabIndex = 19;
+            this.btnSaveFile.Text = "حفظ الملف";
+            this.btnSaveFile.UseSelectable = true;
+            this.btnSaveFile.Click += new System.EventHandler(this.btnSaveText_Click);
+            // 
             // lblLetterCounter
             // 
             this.lblLetterCounter.AutoSize = true;
-            this.lblLetterCounter.Location = new System.Drawing.Point(937, 97);
+            this.lblLetterCounter.Location = new System.Drawing.Point(920, 97);
             this.lblLetterCounter.Name = "lblLetterCounter";
-            this.lblLetterCounter.Size = new System.Drawing.Size(88, 19);
+            this.lblLetterCounter.Size = new System.Drawing.Size(100, 19);
             this.lblLetterCounter.TabIndex = 18;
-            this.lblLetterCounter.Text = "Letter Count: ";
+            this.lblLetterCounter.Text = "عدد الحروف: ";
             // 
             // txtBoxSearch
             // 
@@ -338,11 +377,11 @@
             // lblWordCounter
             // 
             this.lblWordCounter.AutoSize = true;
-            this.lblWordCounter.Location = new System.Drawing.Point(939, 119);
+            this.lblWordCounter.Location = new System.Drawing.Point(920, 119);
             this.lblWordCounter.Name = "lblWordCounter";
-            this.lblWordCounter.Size = new System.Drawing.Size(81, 19);
+            this.lblWordCounter.Size = new System.Drawing.Size(100, 19);
             this.lblWordCounter.TabIndex = 16;
-            this.lblWordCounter.Text = "Word Count";
+            this.lblWordCounter.Text = "عدد الكلمات: ";
             // 
             // gridViewResults
             // 
@@ -351,44 +390,45 @@
             this.gridViewResults.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.gridViewResults.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.gridViewResults.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle28.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(85)))), ((int)(((byte)(85)))));
-            dataGridViewCellStyle28.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle28.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle28.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(102)))), ((int)(((byte)(102)))));
-            dataGridViewCellStyle28.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle28.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gridViewResults.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle28;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(85)))), ((int)(((byte)(85)))));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(102)))), ((int)(((byte)(102)))));
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gridViewResults.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.gridViewResults.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gridViewResults.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.wordNumber,
-            this.wordsColumn});
-            dataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle29.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle29.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle29.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
-            dataGridViewCellStyle29.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(102)))), ((int)(((byte)(102)))));
-            dataGridViewCellStyle29.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle29.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gridViewResults.DefaultCellStyle = dataGridViewCellStyle29;
+            this.colWords,
+            this.colFrequency});
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(102)))), ((int)(((byte)(102)))));
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gridViewResults.DefaultCellStyle = dataGridViewCellStyle5;
             this.gridViewResults.EnableHeadersVisualStyles = false;
             this.gridViewResults.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.gridViewResults.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.gridViewResults.Location = new System.Drawing.Point(23, 0);
             this.gridViewResults.Name = "gridViewResults";
             this.gridViewResults.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle30.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(85)))), ((int)(((byte)(85)))));
-            dataGridViewCellStyle30.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle30.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle30.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(102)))), ((int)(((byte)(102)))));
-            dataGridViewCellStyle30.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle30.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gridViewResults.RowHeadersDefaultCellStyle = dataGridViewCellStyle30;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(85)))), ((int)(((byte)(85)))));
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(102)))), ((int)(((byte)(102)))));
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gridViewResults.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.gridViewResults.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.gridViewResults.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.gridViewResults.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridViewResults.Size = new System.Drawing.Size(320, 597);
+            this.gridViewResults.Size = new System.Drawing.Size(414, 597);
             this.gridViewResults.Style = MetroFramework.MetroColorStyle.Silver;
             this.gridViewResults.TabIndex = 17;
             this.gridViewResults.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -399,23 +439,9 @@
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(75, 23);
             this.btnBack.TabIndex = 18;
-            this.btnBack.Text = "Back";
+            this.btnBack.Text = "عودة";
             this.btnBack.UseSelectable = true;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
-            // 
-            // wordNumber
-            // 
-            this.wordNumber.HeaderText = "#";
-            this.wordNumber.Name = "wordNumber";
-            this.wordNumber.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.wordNumber.Width = 25;
-            // 
-            // wordsColumn
-            // 
-            this.wordsColumn.HeaderText = "Words";
-            this.wordsColumn.Name = "wordsColumn";
-            this.wordsColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.wordsColumn.Width = 250;
             // 
             // panelResults
             // 
@@ -426,7 +452,7 @@
             this.panelResults.HorizontalScrollbarSize = 10;
             this.panelResults.Location = new System.Drawing.Point(0, 58);
             this.panelResults.Name = "panelResults";
-            this.panelResults.Size = new System.Drawing.Size(374, 651);
+            this.panelResults.Size = new System.Drawing.Size(465, 651);
             this.panelResults.TabIndex = 19;
             this.panelResults.VerticalScrollbarBarColor = true;
             this.panelResults.VerticalScrollbarHighlightOnWheel = false;
@@ -460,7 +486,7 @@
             this.txtBoxFind.Size = new System.Drawing.Size(172, 23);
             this.txtBoxFind.TabIndex = 20;
             this.txtBoxFind.UseSelectable = true;
-            this.txtBoxFind.WaterMark = "Text to be replaced...";
+            this.txtBoxFind.WaterMark = "النص القديم...";
             this.txtBoxFind.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtBoxFind.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
@@ -491,7 +517,7 @@
             this.txtBoxReplace.Size = new System.Drawing.Size(172, 23);
             this.txtBoxReplace.TabIndex = 21;
             this.txtBoxReplace.UseSelectable = true;
-            this.txtBoxReplace.WaterMark = "Text to replace...";
+            this.txtBoxReplace.WaterMark = "النص الجديد...";
             this.txtBoxReplace.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtBoxReplace.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
@@ -502,12 +528,13 @@
             this.btnReplace.Name = "btnReplace";
             this.btnReplace.Size = new System.Drawing.Size(393, 38);
             this.btnReplace.TabIndex = 22;
-            this.btnReplace.Text = "Find and Replace";
+            this.btnReplace.Text = "بحث و إستبدال";
             this.btnReplace.UseSelectable = true;
             this.btnReplace.Click += new System.EventHandler(this.btnReplace_Click);
             // 
             // panelFindAndReplace
             // 
+            this.panelFindAndReplace.Controls.Add(this.btnBack1);
             this.panelFindAndReplace.Controls.Add(this.btnReplace);
             this.panelFindAndReplace.Controls.Add(this.txtBoxReplace);
             this.panelFindAndReplace.Controls.Add(this.txtBoxFind);
@@ -523,21 +550,59 @@
             this.panelFindAndReplace.VerticalScrollbarSize = 10;
             this.panelFindAndReplace.Visible = false;
             // 
-            // btnSaveText
+            // openFileDialog
             // 
-            this.btnSaveText.Location = new System.Drawing.Point(471, 602);
-            this.btnSaveText.Name = "btnSaveText";
-            this.btnSaveText.Size = new System.Drawing.Size(116, 31);
-            this.btnSaveText.TabIndex = 19;
-            this.btnSaveText.Text = "Save Text";
-            this.btnSaveText.UseSelectable = true;
-            this.btnSaveText.Click += new System.EventHandler(this.btnSaveText_Click);
+            this.openFileDialog.FileName = "openFileDialog1";
+            // 
+            // wordNumber
+            // 
+            this.wordNumber.HeaderText = "#";
+            this.wordNumber.Name = "wordNumber";
+            this.wordNumber.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.wordNumber.Width = 25;
+            // 
+            // colWords
+            // 
+            this.colWords.HeaderText = "الكلمات";
+            this.colWords.Name = "colWords";
+            this.colWords.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.colWords.Width = 250;
+            // 
+            // colFrequency
+            // 
+            this.colFrequency.HeaderText = "التردد";
+            this.colFrequency.Name = "colFrequency";
+            // 
+            // btnBack1
+            // 
+            this.btnBack1.Location = new System.Drawing.Point(553, 168);
+            this.btnBack1.Name = "btnBack1";
+            this.btnBack1.Size = new System.Drawing.Size(175, 23);
+            this.btnBack1.TabIndex = 23;
+            this.btnBack1.Text = "عودة";
+            this.btnBack1.UseSelectable = true;
+            this.btnBack1.Click += new System.EventHandler(this.btnBack1_Click);
+            // 
+            // tileSwitchLang
+            // 
+            this.tileSwitchLang.ActiveControl = null;
+            this.tileSwitchLang.Location = new System.Drawing.Point(1066, 38);
+            this.tileSwitchLang.Name = "tileSwitchLang";
+            this.tileSwitchLang.Size = new System.Drawing.Size(180, 23);
+            this.tileSwitchLang.Style = MetroFramework.MetroColorStyle.Silver;
+            this.tileSwitchLang.TabIndex = 25;
+            this.tileSwitchLang.Text = "اللغة: العربية";
+            this.tileSwitchLang.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.tileSwitchLang.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.tileSwitchLang.UseSelectable = true;
+            this.tileSwitchLang.Click += new System.EventHandler(this.tileSwitchLang_Click);
             // 
             // TextEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1280, 720);
+            this.Controls.Add(this.tileSwitchLang);
             this.Controls.Add(this.panelFindAndReplace);
             this.Controls.Add(this.panelResults);
             this.Controls.Add(this.panelEnterText);
@@ -546,7 +611,7 @@
             this.Resizable = false;
             this.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow;
             this.Style = MetroFramework.MetroColorStyle.Silver;
-            this.Text = "Text Editor";
+            this.Text = "محرر النص";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.panelEnterText.ResumeLayout(false);
             this.panelEnterText.PerformLayout();
@@ -580,15 +645,21 @@
         private MetroFramework.Controls.MetroLabel lblWordCounter;
         private MetroFramework.Controls.MetroTextBox txtBoxSearch;
         private MetroFramework.Controls.MetroLabel lblLetterCounter;
-        private System.Windows.Forms.DataGridViewTextBoxColumn wordNumber;
-        private System.Windows.Forms.DataGridViewTextBoxColumn wordsColumn;
         private MetroFramework.Controls.MetroPanel panelResults;
         private MetroFramework.Controls.MetroTextBox txtBoxFind;
         private MetroFramework.Controls.MetroTextBox txtBoxReplace;
         private MetroFramework.Controls.MetroButton btnReplace;
         private MetroFramework.Controls.MetroPanel panelFindAndReplace;
-        private MetroFramework.Controls.MetroButton btnSaveText;
-        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private MetroFramework.Controls.MetroButton btnSaveFile;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog;
+        private MetroFramework.Controls.MetroButton btnNewFile;
+        private MetroFramework.Controls.MetroButton btnOpenFile;
+        private System.Windows.Forms.OpenFileDialog openFileDialog;
+        private System.Windows.Forms.DataGridViewTextBoxColumn wordNumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colWords;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFrequency;
+        private MetroFramework.Controls.MetroButton btnBack1;
+        private MetroFramework.Controls.MetroTile tileSwitchLang;
     }
 }
 
