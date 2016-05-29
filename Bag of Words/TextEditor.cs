@@ -256,7 +256,7 @@ namespace Bag_of_Words
 
                 while(SR.Peek() != -1)
                 {
-                    file += SR.ReadLine();
+                    file += (SR.ReadLine() + Environment.NewLine);
                 }
                 textBox.Text = file;
                 SR.Close();
