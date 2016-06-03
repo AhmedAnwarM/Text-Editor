@@ -48,25 +48,26 @@
             this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.textBox = new System.Windows.Forms.TextBox();
             this.panelEnterText = new MetroFramework.Controls.MetroPanel();
+            this.btnSaveFile = new MetroFramework.Controls.MetroButton();
             this.btnNewFile = new MetroFramework.Controls.MetroButton();
             this.btnOpenFile = new MetroFramework.Controls.MetroButton();
-            this.btnSaveFile = new MetroFramework.Controls.MetroButton();
+            this.btnSaveAs = new MetroFramework.Controls.MetroButton();
             this.lblLetterCounter = new MetroFramework.Controls.MetroLabel();
             this.txtBoxSearch = new MetroFramework.Controls.MetroTextBox();
             this.lblWordCounter = new MetroFramework.Controls.MetroLabel();
             this.gridViewResults = new MetroFramework.Controls.MetroGrid();
+            this.wordNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colWords = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFrequency = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnBack = new MetroFramework.Controls.MetroButton();
             this.panelResults = new MetroFramework.Controls.MetroPanel();
             this.txtBoxFind = new MetroFramework.Controls.MetroTextBox();
             this.txtBoxReplace = new MetroFramework.Controls.MetroTextBox();
             this.btnReplace = new MetroFramework.Controls.MetroButton();
             this.panelFindAndReplace = new MetroFramework.Controls.MetroPanel();
+            this.btnBack1 = new MetroFramework.Controls.MetroButton();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.wordNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colWords = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFrequency = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnBack1 = new MetroFramework.Controls.MetroButton();
             this.tileSwitchLang = new MetroFramework.Controls.MetroTile();
             this.panelEnterText.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewResults)).BeginInit();
@@ -273,9 +274,10 @@
             // 
             // panelEnterText
             // 
+            this.panelEnterText.Controls.Add(this.btnSaveFile);
             this.panelEnterText.Controls.Add(this.btnNewFile);
             this.panelEnterText.Controls.Add(this.btnOpenFile);
-            this.panelEnterText.Controls.Add(this.btnSaveFile);
+            this.panelEnterText.Controls.Add(this.btnSaveAs);
             this.panelEnterText.Controls.Add(this.lblLetterCounter);
             this.panelEnterText.Controls.Add(this.txtBoxSearch);
             this.panelEnterText.Controls.Add(this.lblWordCounter);
@@ -305,9 +307,19 @@
             this.panelEnterText.VerticalScrollbarHighlightOnWheel = false;
             this.panelEnterText.VerticalScrollbarSize = 10;
             // 
+            // btnSaveFile
+            // 
+            this.btnSaveFile.Location = new System.Drawing.Point(395, 602);
+            this.btnSaveFile.Name = "btnSaveFile";
+            this.btnSaveFile.Size = new System.Drawing.Size(116, 31);
+            this.btnSaveFile.TabIndex = 22;
+            this.btnSaveFile.Text = "حفظ الملف";
+            this.btnSaveFile.UseSelectable = true;
+            this.btnSaveFile.Click += new System.EventHandler(this.btnSaveFile_Click);
+            // 
             // btnNewFile
             // 
-            this.btnNewFile.Location = new System.Drawing.Point(318, 602);
+            this.btnNewFile.Location = new System.Drawing.Point(242, 602);
             this.btnNewFile.Name = "btnNewFile";
             this.btnNewFile.Size = new System.Drawing.Size(116, 31);
             this.btnNewFile.TabIndex = 21;
@@ -317,7 +329,7 @@
             // 
             // btnOpenFile
             // 
-            this.btnOpenFile.Location = new System.Drawing.Point(624, 602);
+            this.btnOpenFile.Location = new System.Drawing.Point(700, 602);
             this.btnOpenFile.Name = "btnOpenFile";
             this.btnOpenFile.Size = new System.Drawing.Size(116, 31);
             this.btnOpenFile.TabIndex = 20;
@@ -325,22 +337,22 @@
             this.btnOpenFile.UseSelectable = true;
             this.btnOpenFile.Click += new System.EventHandler(this.btnOpenFile_Click);
             // 
-            // btnSaveFile
+            // btnSaveAs
             // 
-            this.btnSaveFile.Location = new System.Drawing.Point(471, 602);
-            this.btnSaveFile.Name = "btnSaveFile";
-            this.btnSaveFile.Size = new System.Drawing.Size(116, 31);
-            this.btnSaveFile.TabIndex = 19;
-            this.btnSaveFile.Text = "حفظ الملف";
-            this.btnSaveFile.UseSelectable = true;
-            this.btnSaveFile.Click += new System.EventHandler(this.btnSaveText_Click);
+            this.btnSaveAs.Location = new System.Drawing.Point(547, 602);
+            this.btnSaveAs.Name = "btnSaveAs";
+            this.btnSaveAs.Size = new System.Drawing.Size(116, 31);
+            this.btnSaveAs.TabIndex = 19;
+            this.btnSaveAs.Text = "حفظ كملف جديد";
+            this.btnSaveAs.UseSelectable = true;
+            this.btnSaveAs.Click += new System.EventHandler(this.btnSaveAs_Click);
             // 
             // lblLetterCounter
             // 
             this.lblLetterCounter.AutoSize = true;
             this.lblLetterCounter.Location = new System.Drawing.Point(920, 97);
             this.lblLetterCounter.Name = "lblLetterCounter";
-            this.lblLetterCounter.Size = new System.Drawing.Size(100, 19);
+            this.lblLetterCounter.Size = new System.Drawing.Size(79, 19);
             this.lblLetterCounter.TabIndex = 18;
             this.lblLetterCounter.Text = "عدد الحروف: ";
             // 
@@ -379,7 +391,7 @@
             this.lblWordCounter.AutoSize = true;
             this.lblWordCounter.Location = new System.Drawing.Point(920, 119);
             this.lblWordCounter.Name = "lblWordCounter";
-            this.lblWordCounter.Size = new System.Drawing.Size(100, 19);
+            this.lblWordCounter.Size = new System.Drawing.Size(82, 19);
             this.lblWordCounter.TabIndex = 16;
             this.lblWordCounter.Text = "عدد الكلمات: ";
             // 
@@ -433,6 +445,25 @@
             this.gridViewResults.TabIndex = 17;
             this.gridViewResults.Theme = MetroFramework.MetroThemeStyle.Light;
             // 
+            // wordNumber
+            // 
+            this.wordNumber.HeaderText = "#";
+            this.wordNumber.Name = "wordNumber";
+            this.wordNumber.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.wordNumber.Width = 25;
+            // 
+            // colWords
+            // 
+            this.colWords.HeaderText = "الكلمات";
+            this.colWords.Name = "colWords";
+            this.colWords.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.colWords.Width = 250;
+            // 
+            // colFrequency
+            // 
+            this.colFrequency.HeaderText = "التردد";
+            this.colFrequency.Name = "colFrequency";
+            // 
             // btnBack
             // 
             this.btnBack.Location = new System.Drawing.Point(146, 611);
@@ -452,7 +483,7 @@
             this.panelResults.HorizontalScrollbarSize = 10;
             this.panelResults.Location = new System.Drawing.Point(0, 58);
             this.panelResults.Name = "panelResults";
-            this.panelResults.Size = new System.Drawing.Size(465, 651);
+            this.panelResults.Size = new System.Drawing.Size(465, 658);
             this.panelResults.TabIndex = 19;
             this.panelResults.VerticalScrollbarBarColor = true;
             this.panelResults.VerticalScrollbarHighlightOnWheel = false;
@@ -550,29 +581,6 @@
             this.panelFindAndReplace.VerticalScrollbarSize = 10;
             this.panelFindAndReplace.Visible = false;
             // 
-            // openFileDialog
-            // 
-            this.openFileDialog.FileName = "openFileDialog1";
-            // 
-            // wordNumber
-            // 
-            this.wordNumber.HeaderText = "#";
-            this.wordNumber.Name = "wordNumber";
-            this.wordNumber.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.wordNumber.Width = 25;
-            // 
-            // colWords
-            // 
-            this.colWords.HeaderText = "الكلمات";
-            this.colWords.Name = "colWords";
-            this.colWords.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.colWords.Width = 250;
-            // 
-            // colFrequency
-            // 
-            this.colFrequency.HeaderText = "التردد";
-            this.colFrequency.Name = "colFrequency";
-            // 
             // btnBack1
             // 
             this.btnBack1.Location = new System.Drawing.Point(553, 168);
@@ -582,6 +590,10 @@
             this.btnBack1.Text = "عودة";
             this.btnBack1.UseSelectable = true;
             this.btnBack1.Click += new System.EventHandler(this.btnBack1_Click);
+            // 
+            // openFileDialog
+            // 
+            this.openFileDialog.FileName = "openFileDialog1";
             // 
             // tileSwitchLang
             // 
@@ -650,7 +662,7 @@
         private MetroFramework.Controls.MetroTextBox txtBoxReplace;
         private MetroFramework.Controls.MetroButton btnReplace;
         private MetroFramework.Controls.MetroPanel panelFindAndReplace;
-        private MetroFramework.Controls.MetroButton btnSaveFile;
+        private MetroFramework.Controls.MetroButton btnSaveAs;
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
         private MetroFramework.Controls.MetroButton btnNewFile;
         private MetroFramework.Controls.MetroButton btnOpenFile;
@@ -660,6 +672,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colFrequency;
         private MetroFramework.Controls.MetroButton btnBack1;
         private MetroFramework.Controls.MetroTile tileSwitchLang;
+        private MetroFramework.Controls.MetroButton btnSaveFile;
     }
 }
 

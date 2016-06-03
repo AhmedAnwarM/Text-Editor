@@ -15,6 +15,8 @@ namespace Bag_of_Words
 {
     public partial class TextEditor : MetroForm
     {
+        bool fileOpened = false;
+        String path = "";
         bool isBold = false;
         bool isItalic = false;
         bool Arabic = true;
@@ -42,6 +44,7 @@ namespace Bag_of_Words
             str = str.Replace(System.Environment.NewLine, " ");
             panelEnterText.Visible = false;
             index = new List<string>();
+            frequency = new List<int>();
             String[] words = str.Split(' ');
             foreach (String word in words)
             {
@@ -52,8 +55,9 @@ namespace Bag_of_Words
                 }
                 else
                 {
-                    int i = index.BinarySearch(word);
-                    frequency[i]++;
+                    int i = index.IndexOf(word);
+                    if(i != -1)
+                        frequency[i]++;
                 }
             }
             for (int i = 0; i < index.Count; i++)
@@ -227,9 +231,8 @@ namespace Bag_of_Words
             txtBoxReplace.Clear();
         }
 
-        private void btnSaveText_Click(object sender, EventArgs e)
+        private void btnSaveAs_Click(object sender, EventArgs e)
         {
-            String path = "";
             DialogResult result = saveFileDialog.ShowDialog();
             if (result == DialogResult.OK)
             {
@@ -239,13 +242,19 @@ namespace Bag_of_Words
                 SW.Write(textBox.Text);
                 SW.Close();
                 FS.Close();
+
+                if (Arabic)
+                    MetroFramework.MetroMessageBox.Show(this, "تم حفظ الملف بنجاح", "نجاح");
+                else
+                    MetroFramework.MetroMessageBox.Show(this, "File saved successfully", "Success");
+
             }
             this.ActiveControl = textBox;
         }
 
         private void btnOpenFile_Click(object sender, EventArgs e)
         {
-            String path = "";
+            fileOpened = true;
             String file = "";
             DialogResult result = openFileDialog.ShowDialog();
             if (result == DialogResult.OK)
@@ -275,8 +284,17 @@ namespace Bag_of_Words
 
         private void btnNewFile_Click_1(object sender, EventArgs e)
         {
-            textBox.Clear();
-            this.ActiveControl = textBox;
+            Object res;
+            if (Arabic)
+                res = MetroFramework.MetroMessageBox.Show(this, "هل أنت واثق أنك تريد فتح ملف جديد و إغلاق الملف المفتوح حاليا؟", "تأكيد", MessageBoxButtons.YesNo);
+            else
+                res = MetroFramework.MetroMessageBox.Show(this, "Are you sure you want to open a new file and close the currently open file?", "Confirm", MessageBoxButtons.YesNo);
+            if ((DialogResult)res == DialogResult.Yes)
+            {
+                fileOpened = false;
+                textBox.Clear();
+                this.ActiveControl = textBox;
+            }
         }
         private void switchToEnglish()
         {
@@ -290,9 +308,11 @@ namespace Bag_of_Words
             metroLabel1.Text = "Font Selection:";
             metroLabel2.Text = "Alignment";
             textBox.TextAlign = HorizontalAlignment.Left;
-            textBox.Text = "Enter Text Here...";
+            if(textBox.Text == "أدخل النص هنا...")
+                textBox.Text = "Enter Text Here...";
             btnNewFile.Text = "New File";
             btnOpenFile.Text = "Open File";
+            btnSaveAs.Text = "Save As";
             btnSaveFile.Text = "Save File";
             lblLetterCounter.Text = "Letter Count: ";
             lblWordCounter.Text = "Word Count: ";
@@ -319,9 +339,11 @@ namespace Bag_of_Words
             metroLabel1.Text = "إختيار الخط";
             metroLabel2.Text = "المحاذاة";
             textBox.TextAlign = HorizontalAlignment.Right;
-            textBox.Text = "أدخل النص هنا...";
+            if (textBox.Text == "Enter Text Here...")
+                textBox.Text = "أدخل النص هنا...";
             btnNewFile.Text = "ملف جديد";
             btnOpenFile.Text = "فتح ملف";
+            btnSaveAs.Text = "حفظ كملف جديد";
             btnSaveFile.Text = "حفظ الملف";
             lblLetterCounter.Text = "عدد الحروف: ";
             lblWordCounter.Text = "عدد الكلمات: ";
@@ -344,6 +366,46 @@ namespace Bag_of_Words
             else
             {
                 switchToArabic();
+            }
+        }
+
+        private void btnSaveFile_Click(object sender, EventArgs e)
+        {
+            if (fileOpened)
+            {
+                FileStream FS = new FileStream(path, FileMode.Create);
+                StreamWriter SW = new StreamWriter(FS);
+                SW.Write(textBox.Text);
+                SW.Close();
+                FS.Close();
+            }
+            else
+            {
+                Object res;
+                if (Arabic)
+                    res = MetroFramework.MetroMessageBox.Show(this, "لم تقم بفتح ملف للتعديل فيه. هل ترغب في حفظ النص المكتوب في ملف جديد؟", "خطأ", MessageBoxButtons.YesNo);
+                else
+                    res = MetroFramework.MetroMessageBox.Show(this, "You have not opened a file, would you like to save the current text to a new file?", "Error", MessageBoxButtons.YesNo);
+
+                if ((DialogResult)res == DialogResult.Yes)
+                {
+                    DialogResult result = saveFileDialog.ShowDialog();
+                    if (result == DialogResult.OK)
+                    {
+                        path = saveFileDialog.FileName;
+                        FileStream FS = new FileStream(path, FileMode.Create);
+                        StreamWriter SW = new StreamWriter(FS);
+                        SW.Write(textBox.Text);
+                        SW.Close();
+                        FS.Close();
+
+                        if (Arabic)
+                            MetroFramework.MetroMessageBox.Show(this, "تم حفظ الملف بنجاح", "نجاح");
+                        else
+                            MetroFramework.MetroMessageBox.Show(this, "File saved successfully", "Success");
+
+                    }
+                }
             }
         }
     }
